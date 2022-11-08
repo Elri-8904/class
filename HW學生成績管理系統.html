@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生成績管理系統</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        main{
+            width: 100%;
+            min-height: 100vh;
+            background-color: #e0e0e0;
+            padding: 50px;
+            display: flex;
+            position: relative;
+        }
+        .std_list{
+            display: flex;
+            width: calc(100% - 300px);
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .std_card{
+            border: 1px solid #3A606E;
+            border-radius: 15px;
+            width: 300px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px;
+            background-color: #AAAE8E;
+            padding-top: 30px;
+        }
+        .std_card img{
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            border: 1px solid #607B7D;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+        }
+        .std_info{
+            width: 300px;
+            font-size: 25px;
+            background-color: #828E82;
+            padding: 25px;
+            position: fixed;
+            right: 30px;
+            height: calc(100% - 100px);
+            border-radius: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="std_list">
+            
+            </div>
+        </div>
+
+        <div class="std_info">
+            <!--p>此學生的段考成績為</p>
+            p>國文 : <span class="chiness"></span></p>
+            p>英文 :<span class="english"></span> </p>
+            p>數學 : <span class="math"></span> </p>
+            p>平均分數為 : <span class="average"> </p>
+            -->
+        </div>
+    </main>
+
+    <script>
+        const std_gender = ['男', '男', '女', '女','男','女','男','女', '女','男']
+        const std_name = ['陳火昱', '蛇昌昌', '邱華華', '吉娃娃','吉拿棒','吉吉急急如律令','一吉棒','吉他','吉野家']
+        const std_number   = [1 ,2 ,3 ,4,5 ,6 ,7 ,8, 9 ,10 ,11 ,12 ] 
+        const chiness_score= [80, 30 ,60 ,40,80, 30 ,60 ,40,80, 30 ,60 ,40]
+        const english_score= [10, 50, 90 , 60,10, 50, 90 , 60,10, 50, 90 , 60]
+        const math_score   = [50 ,70 ,40, 90,50 ,70 ,40, 90,50 ,70 ,40, 90]
+        
+        
+
+        for (let i=0 ; i<std_name.length ; i++){
+            var std_list = document.querySelector('.std_list')
+            //判斷是男還是女，判斷後性別與性別圖片就能固定了!
+            if(std_gender[i]=='男'){
+                std_list.innerHTML = std_list.innerHTML+`
+            <div class="std_card">
+                <img src="./img/boy.png" alt="">
+                <p>姓名: ${std_name[i]}</p>
+                <p>性別: 男</p>
+                <p>學號: ${std_number[i]} </p>
+            </div>`
+            }
+            else{
+                std_list.innerHTML = std_list.innerHTML+`
+            <div class="std_card">
+                <img src="./img/girl.png" alt="">
+                <p>姓名: ${std_name[i]}</p>
+                <p>性別: 女</p>
+                <p>學號: ${std_number[i]} </p>
+            </div>`
+            }}
+            //querySelector只能選擇符合條件的第一個照片
+            //const card = document.querySelector('.std_card')
+
+            //**當需要選擇多個得時候使用**
+            const cards = document.querySelectorAll('.std_card')
+            const info = document.querySelector('.std_info')
+            
+            for(let index=0 ; index<std_name.length ; index++){
+                cards[index].onclick=function(){
+                console.log('第'+(index+1)+ '張卡片被按到ㄌ')
+                var sum_score = ((chiness_score[index]+english_score[index]+math_score[index])/3).toFixed(0)
+                if(std_gender[index]=='男'){
+                info.innerHTML = `
+                <img src="./img/boy.png" alt="">
+                <p>姓名: ${std_name[index]}</p>
+                 <p>此學生的段考成績為 : </p>
+                 <p>國文 : ${chiness_score[index]}</p>
+                 <p>英文 :  ${english_score[index]}</p>
+                 <p>數學 : ${math_score[index]} </p>
+                 <p>平均分數為 : ${sum_score} </p>`
+                }
+                else{
+                info.innerHTML =`
+                <img src="./img/girl.png" alt="">
+                <p>姓名: ${std_name[index]}</p>
+                 <p>此學生的段考成績為</p>
+                 <p>國文 : ${chiness_score[index]}</p>
+                 <p>英文 :  ${english_score[index]}</p>
+                 <p>數學 : ${math_score[index]} </p>
+                 <p>平均分數為 : ${sum_score} </p>`
+            }}}
+            //chinese.innerHTML = chinese_grade[index]
+            //這裡只輸出數值，要文字要另外打在 info裡面
+
+    </script>
+
+
+
+</body>
+</html>
